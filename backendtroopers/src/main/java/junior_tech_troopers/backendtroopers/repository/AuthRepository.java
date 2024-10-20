@@ -50,6 +50,13 @@ public interface AuthRepository extends CrudRepository<User,Integer> {
             @Param("phone") String phone,
             @Param("locality") String locality  // Se agregó el parámetro para la localidad
     );
-
+    @Query("SELECT " +
+            "u.user_token AS user_token, " +
+            "r.title AS titulo_rol, " +
+            "u.password AS password " +
+            "FROM public.users AS u " +
+            "LEFT JOIN public.roles AS r ON r.rol_token = u.user_rol " +
+            "WHERE u.username = :username")
+    User buscarUsuario(@Param("username") String username);
 
 }
