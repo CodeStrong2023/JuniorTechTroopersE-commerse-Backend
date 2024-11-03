@@ -5,6 +5,7 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import prueba1.login.DTO.response.DestinoSeleccionadoDTO;
 import prueba1.login.entity.Hospedaje;
 
 import java.util.List;
@@ -109,4 +110,26 @@ public interface HospedajeRepository extends CrudRepository<Hospedaje, String>{
     )
     List<Hospedaje> obtenerDestinosHospedajes();
 
+    @Query(
+            "SELECT " +
+                    "hospedaje.hospedaje_token, " +
+                    "hospedaje.capacity, " +
+                    "hospedaje.description, " +
+                    "hospedaje.price, " +
+                    "hospedaje.locality, " +
+                    "hospedaje.wifi, " +
+                    "hospedaje.tv, " +
+                    "hospedaje.garage, " +
+                    "hospedaje.air_conditioning, " +
+                    "hospedaje.heating, " +
+                    "hospedaje.pool, " +
+                    "hospedaje.created_at, " +
+                    "hospedaje.nombre, " +
+                    "(SELECT img.img_url AS imgUrlHospedajeImg " +
+                    "FROM public.hospedajes_img AS img " +
+                    "WHERE img.hospedaje_token = hospedaje.hospedaje_token LIMIT 1) " +
+                    "FROM public.hospedajes AS hospedaje " +
+                    "WHERE hospedaje.hospedaje_token =:hospedajeToken;"
+    )
+    Hospedaje obtenerDestinoSeleccionado(@Param("hospedajeToken") String hospedajeToken);
 }

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import prueba1.login.DTO.request.HospedajeDTO;
 import prueba1.login.DTO.request.HospedajeImagenesDTO;
 import prueba1.login.DTO.response.DestinoDTO;
+import prueba1.login.DTO.response.DestinoSeleccionadoDTO;
 import prueba1.login.entity.Hospedaje;
 import prueba1.login.entity.HospedajeImg;
 import prueba1.login.repository.HospedajeImgRepository;
@@ -50,20 +51,8 @@ public class HospedajeService {
         }
     }
 
-    public List<DestinoDTO> destinosHospedajes(){
-        List<Hospedaje> hospedajes = hospedajeRepository.obtenerDestinosHospedajes();
-        List<DestinoDTO> destinosDTO = new ArrayList<>();
 
-        for (Hospedaje hospedaje : hospedajes) {
-            DestinoDTO destinoDTO = new DestinoDTO();
-            destinoDTO.setHospedajeToken(hospedaje.getHospedajeToken());
-            destinoDTO.setNombreHospedaje(hospedaje.getNombreHospedaje());
-            destinoDTO.setPrice(hospedaje.getPrice());
-            destinoDTO.setImg_url(hospedaje.getImgUrlHospedajeImg());
-            destinosDTO.add(destinoDTO);
-        }
-        return destinosDTO;
-    }
+
     public List<HospedajeDTO> hospedajesPropios(String userToken) {
         List<Hospedaje> hospedajes = hospedajeRepository.findAllHospedajes(userToken);
         List<HospedajeDTO> hospedajesDTO = new ArrayList<>();
@@ -95,6 +84,40 @@ public class HospedajeService {
         }
 
         return hospedajesDTO;
+    }
+    public List<DestinoDTO> destinosHospedajes() {
+        List<Hospedaje> hospedajes = hospedajeRepository.obtenerDestinosHospedajes();
+        List<DestinoDTO> destinosDTO = new ArrayList<>();
+
+        for (Hospedaje hospedaje : hospedajes) {
+            DestinoDTO destinoDTO = new DestinoDTO();
+            destinoDTO.setHospedajeToken(hospedaje.getHospedajeToken());
+            destinoDTO.setNombreHospedaje(hospedaje.getNombreHospedaje());
+            destinoDTO.setPrice(hospedaje.getPrice());
+            destinoDTO.setImg_url(hospedaje.getImgUrlHospedajeImg());
+            destinosDTO.add(destinoDTO);
+        }
+        return destinosDTO;
+    }
+
+    public DestinoSeleccionadoDTO destinoSeleccionadoDTO(String hospedajeToken){
+        Hospedaje hospedaje = hospedajeRepository.obtenerDestinoSeleccionado(hospedajeToken);
+        DestinoSeleccionadoDTO destinoSeleccionadoDTO = new DestinoSeleccionadoDTO();
+        destinoSeleccionadoDTO.setHospedajeToken(hospedaje.getHospedajeToken());
+        destinoSeleccionadoDTO.setName(hospedaje.getNombreHospedaje());
+        destinoSeleccionadoDTO.setCapacity(hospedaje.getCapacity());
+        destinoSeleccionadoDTO.setDescription(hospedaje.getDescription());
+        destinoSeleccionadoDTO.setPrice(hospedaje.getPrice());
+        destinoSeleccionadoDTO.setLocality(hospedaje.getLocality());
+        destinoSeleccionadoDTO.setWifi(hospedaje.getWifi());
+        destinoSeleccionadoDTO.setTv(hospedaje.getTv());
+        destinoSeleccionadoDTO.setGarage(hospedaje.getGarage());
+        destinoSeleccionadoDTO.setAirConditioning(hospedaje.getAirConditioning());
+        destinoSeleccionadoDTO.setHeating(hospedaje.getHeating());
+        destinoSeleccionadoDTO.setPool(hospedaje.getPool());
+        destinoSeleccionadoDTO.setUrlImg(hospedaje.getImgUrlHospedajeImg());
+
+        return destinoSeleccionadoDTO;
     }
 
 }
