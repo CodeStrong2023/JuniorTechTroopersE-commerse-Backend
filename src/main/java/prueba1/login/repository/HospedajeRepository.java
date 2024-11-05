@@ -138,4 +138,13 @@ public interface HospedajeRepository extends CrudRepository<Hospedaje, String>{
                     "WHERE hospedaje.hospedaje_token =:hospedajeToken;"
     )
     Hospedaje obtenerDestinoSeleccionado(@Param("hospedajeToken") String hospedajeToken);
+    @Query(
+            "SELECT " +
+                    "hospedaje.user_token, " +
+                    "hospedaje.hospedaje_token, " +
+                    "hospedaje.price " +
+                    "FROM public.hospedajes AS hospedaje " +
+                    "WHERE hospedaje.hospedaje_token =:hospedajeToken;"
+    )
+    Hospedaje obtenerInformacionParaTicket(@Param("hospedajeToken") String hospedajeToken);
 }
