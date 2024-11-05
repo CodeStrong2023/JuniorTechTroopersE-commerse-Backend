@@ -20,11 +20,11 @@ public class HomeService {
 
         for (Hospedaje hospedaje : hospedajesEntity) {
             HomeDTO homeDTO = new HomeDTO();
+            homeDTO.setHospedajeToken(hospedaje.getHospedajeToken());
             homeDTO.setNombreHospedaje(hospedaje.getNombreHospedaje());
             homeDTO.setDescription(hospedaje.getDescription());
             homeDTO.setLocality(hospedaje.getLocality());
             homeDTO.setImg_url(hospedaje.getImgUrlHospedajeImg());
-
             homeDTOLista.add(homeDTO);
         }
 

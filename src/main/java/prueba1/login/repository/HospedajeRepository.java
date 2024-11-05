@@ -5,7 +5,6 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import prueba1.login.DTO.response.DestinoSeleccionadoDTO;
 import prueba1.login.entity.Hospedaje;
 
 import java.util.List;
@@ -15,6 +14,7 @@ public interface HospedajeRepository extends CrudRepository<Hospedaje, String>{
 
     @Query(
             "SELECT " +
+                    "hospedaje.hospedaje_token, "+
                     "hospedaje.nombre, " +
                     "hospedaje.description, " +
                     "hospedaje.locality, " +

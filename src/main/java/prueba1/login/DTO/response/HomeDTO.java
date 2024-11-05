@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HomeDTO {
+    private String hospedajeToken;
     private String nombreHospedaje;
     private String description;
     private String img_url;
