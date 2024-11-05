@@ -43,17 +43,20 @@ public class HospedajeController {
     }
 
     @GetMapping("/destinos")
-    public List<DestinoDTO> destinosHospedajes(@RequestHeader("Authorization") String jwt){
+    public List<DestinoDTO> destinosHospedajes(@RequestHeader("Authorization") String jwt,
+                                               @Param("locality") String locality,
+                                               @Param("date") String date){
         JwtDTO jwtDTO = jwtUtil.getJwtObject(jwt);
 
         if (jwtDTO.getError() != null) {
             return null;
         }
-        return hospedajeService.destinosHospedajes();
+        return hospedajeService.destinosHospedajes(locality, date);
     }
 
     @GetMapping("/destinos/{hospedajeToken}")
-    public DestinoSeleccionadoDTO destinoSeleccionadoDTO(@RequestHeader("Authorization") String jwt, @PathVariable("hospedajeToken") String hospedajeToken){
+    public DestinoSeleccionadoDTO destinoSeleccionadoDTO(@RequestHeader("Authorization") String jwt,
+                                                         @PathVariable("hospedajeToken") String hospedajeToken){
         JwtDTO jwtDTO = jwtUtil.getJwtObject(jwt);
 
         if (jwtDTO.getError() != null) {

@@ -104,11 +104,17 @@ public interface HospedajeRepository extends CrudRepository<Hospedaje, String>{
                     "FROM public.hospedajes_img AS img " +
                     "WHERE img.hospedaje_token = hospedaje.hospedaje_token LIMIT 1) " +
                     "FROM public.hospedajes AS hospedaje " +
+                    "LEFT JOIN public.ticket AS ticket " +
+                    "ON hospedaje.hospedaje_token = ticket.hospedaje_token " +
                     "WHERE hospedaje.active = true " +
+                    "AND (COALESCE(:locality, '') = '' OR hospedaje.locality LIKE '%' || :locality || '%') " +
+                    "AND (COALESCE(:date, '') = '' OR CAST(:date AS DATE) < ticket.start_date OR CAST(:date AS DATE) > ticket.end_date OR ticket.id IS NULL) " +
                     "ORDER BY hospedaje.created_at DESC " +
-                    "limit 16;"
+                    "LIMIT 16"
     )
-    List<Hospedaje> obtenerDestinosHospedajes();
+    List<Hospedaje> obtenerDestinosHospedajes(@Param("locality") String locality,
+                                              @Param("date") String date);
+
 
     @Query(
             "SELECT " +
