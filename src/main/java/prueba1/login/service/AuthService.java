@@ -1,6 +1,7 @@
 package prueba1.login.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import prueba1.login.DTO.request.UserLoginDTO;
@@ -10,6 +11,7 @@ import prueba1.login.jwt.JwtUtil;
 import prueba1.login.repository.AuthRepository;
 import prueba1.login.repository.UserRepository;
 import prueba1.login.utils.BcryptFunctions;
+import prueba1.login.utils.Mail;
 
 
 @Service
@@ -21,6 +23,8 @@ public class AuthService {
     private AuthRepository authRepository;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private Mail mail;
 
     @Transactional
     public void registroUsuario(User user) {
@@ -28,6 +32,8 @@ public class AuthService {
         if (user.getUserName() == null) return;
 
         String usernameToLowerCase = user.getUserName().toLowerCase();
+
+        int codigoVerificacion = 100000 + new java.util.Random().nextInt(900000);
 
         authRepository.registrarUsuario(
                 usernameToLowerCase,
@@ -38,8 +44,18 @@ public class AuthService {
                 user.getEmail(),
                 user.getBirthdate(),
                 user.getPhone(),
-                user.getLocality()
+                user.getLocality(),
+                codigoVerificacion
         );
+
+        mail.sendEmail(
+                user.getEmail(),
+                "Validar cuenta",
+                mail.generarTemplate(user.getFirstname() + " " + user.getLastname(),
+                        codigoVerificacion
+                )
+        );
+
     }
 
     public JWTResponseDTO loginUsuario(UserLoginDTO userLogin) {
@@ -58,7 +74,7 @@ public class AuthService {
                     userDB.getRolTitle()
             );
 
-        } else{
+        } else {
             // DEVOLVEMOS UN ERROR
             return new JWTResponseDTO(
                     "",

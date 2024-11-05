@@ -12,6 +12,8 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, String> {
+    @Query("SELECT email FROM public.users where user_token = :userToken;")
+    String obtenerEmailPorUserToken(@Param("userToken") String userToken);
 
     @Modifying
     @Query("INSERT INTO public.ticket (" +

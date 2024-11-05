@@ -7,8 +7,11 @@ import prueba1.login.DTO.request.TicketRequestDTO;
 import prueba1.login.DTO.response.TicketResponseDTO;
 import prueba1.login.entity.Hospedaje;
 import prueba1.login.entity.Ticket;
+import prueba1.login.entity.User;
 import prueba1.login.repository.HospedajeRepository;
 import prueba1.login.repository.TicketRepository;
+import prueba1.login.repository.UserRepository;
+import prueba1.login.utils.Mail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,11 @@ public class TicketService {
     private TicketRepository ticketRepository;
     @Autowired
     private HospedajeRepository hospedajeRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private Mail mail;
 
     @Transactional
     public void insertarTicket(TicketRequestDTO ticketRequestDTO, String userToken){
@@ -43,6 +51,41 @@ public class TicketService {
                 ticketRequestDTO.getEndDate(),
                 totalPago
         );
+
+        User userOwnerData = userRepository.obtenerPerfilUsuarioPorUserToken(hospedajeParaTicket.getUserToken());
+        User userRenterData = userRepository.obtenerPerfilUsuarioPorUserToken(userToken);
+
+        mail.sendEmail(
+                userOwnerData.getEmail(),
+                "Alquiler confimado",
+                mail.mailTicket(
+                        userRenterData.getFirstname(),
+                        userRenterData.getLastname(),
+                        userRenterData.getEmail(),
+                        userRenterData.getPhone(),
+                        hospedajeParaTicket.getNombreHospedaje(),
+                        ticketRequestDTO.getStartDate(),
+                        ticketRequestDTO.getEndDate(),
+                        totalPago
+                ));
+
+        mail.sendEmail(
+                userRenterData.getEmail(),
+                "Alquiler realizado",
+                mail.mailTicket(
+                        userOwnerData.getFirstname(),
+                        userOwnerData.getLastname(),
+                        userOwnerData.getEmail(),
+                        userOwnerData.getPhone(),
+                        hospedajeParaTicket.getNombreHospedaje(),
+                        ticketRequestDTO.getStartDate(),
+                        ticketRequestDTO.getEndDate(),
+                        totalPago
+                )
+        );
+
+
+
     }
 
     public List<TicketResponseDTO> mostrarTicketRegistrados(String userToken){
