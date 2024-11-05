@@ -4,9 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import prueba1.login.DTO.request.TicketRequestDTO;
+import prueba1.login.DTO.response.TicketResponseDTO;
 import prueba1.login.entity.Hospedaje;
+import prueba1.login.entity.Ticket;
 import prueba1.login.repository.HospedajeRepository;
 import prueba1.login.repository.TicketRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TicketService {
@@ -17,8 +22,11 @@ public class TicketService {
 
     @Transactional
     public void insertarTicket(TicketRequestDTO ticketRequestDTO, String userToken){
-        Hospedaje hospedajeParaTicket = hospedajeRepository.obtenerInformacionParaTicket(ticketRequestDTO.getHospedajeToken());
 
+        Hospedaje hospedajeParaTicket = hospedajeRepository.obtenerInformacionParaTicket(ticketRequestDTO.getHospedajeToken());
+        if (hospedajeParaTicket.getUserToken() == userToken){
+            return;
+        }
         // Calcular la diferencia absoluta en milisegundos
         long diffInMillies = Math.abs(ticketRequestDTO.getEndDate().getTime() - ticketRequestDTO.getStartDate().getTime());
 
@@ -35,5 +43,40 @@ public class TicketService {
                 ticketRequestDTO.getEndDate(),
                 totalPago
         );
+    }
+
+    public List<TicketResponseDTO> mostrarTicketRegistrados(String userToken){
+        List<Ticket> tickets = ticketRepository.ticketConfirmados(userToken);
+        List<TicketResponseDTO> ticketResponseDTOS = new ArrayList<>();
+
+        for (Ticket ticket: tickets) {
+            TicketResponseDTO ticketResponseDTO = new TicketResponseDTO();
+            ticketResponseDTO.setNombreHospedaje(ticket.getHospedajeNombre());
+            ticketResponseDTO.setUserNameRenter(ticket.getUsername());
+            ticketResponseDTO.setEmailRenter(ticket.getUserEmail());
+            ticketResponseDTO.setPhoneRenter(ticket.getUserPhone());
+            ticketResponseDTO.setStartDate(ticket.getStartDate());
+            ticketResponseDTO.setEndDate(ticket.getEndDate());
+            ticketResponseDTO.setTotalAmount(ticket.getTotalAmount());
+            ticketResponseDTOS.add(ticketResponseDTO);
+        }
+        return ticketResponseDTOS;
+    }
+
+    public List<TicketResponseDTO> reservasRegistradas(String userToken){
+        List<Ticket> tickets = ticketRepository.reservasRealizadas(userToken);
+        List<TicketResponseDTO> ticketResponseDTOS = new ArrayList<>();
+        for (Ticket ticket: tickets) {
+            TicketResponseDTO ticketResponseDTO = new TicketResponseDTO();
+            ticketResponseDTO.setNombreHospedaje(ticket.getHospedajeNombre());
+            ticketResponseDTO.setUserNameRenter(ticket.getUsername());
+            ticketResponseDTO.setEmailRenter(ticket.getUserEmail());
+            ticketResponseDTO.setPhoneRenter(ticket.getUserPhone());
+            ticketResponseDTO.setStartDate(ticket.getStartDate());
+            ticketResponseDTO.setEndDate(ticket.getEndDate());
+            ticketResponseDTO.setTotalAmount(ticket.getTotalAmount());
+            ticketResponseDTOS.add(ticketResponseDTO);
+        }
+        return ticketResponseDTOS;
     }
 }
