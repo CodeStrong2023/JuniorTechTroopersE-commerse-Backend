@@ -9,6 +9,7 @@ import prueba1.login.repository.UserRepository;
 @Service
 public class UserService {
 
+
     @Autowired
     private UserRepository userRepository;
 
