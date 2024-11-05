@@ -5,7 +5,6 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import prueba1.login.entity.Hospedaje;
 import prueba1.login.entity.Ticket;
 
 import java.util.Date;

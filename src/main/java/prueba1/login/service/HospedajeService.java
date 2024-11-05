@@ -85,8 +85,8 @@ public class HospedajeService {
 
         return hospedajesDTO;
     }
-    public List<DestinoDTO> destinosHospedajes(String locality, String date) {
-        List<Hospedaje> hospedajes = hospedajeRepository.obtenerDestinosHospedajes(locality, date);
+    public List<DestinoDTO> destinosHospedajes(String usertoken, String locality, String date) {
+        List<Hospedaje> hospedajes = hospedajeRepository.obtenerDestinosHospedajes(usertoken, locality, date);
         List<DestinoDTO> destinosDTO = new ArrayList<>();
 
         for (Hospedaje hospedaje : hospedajes) {

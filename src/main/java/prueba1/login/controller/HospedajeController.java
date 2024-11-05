@@ -51,7 +51,7 @@ public class HospedajeController {
         if (jwtDTO.getError() != null) {
             return null;
         }
-        return hospedajeService.destinosHospedajes(locality, date);
+        return hospedajeService.destinosHospedajes(jwtDTO.getUserToken(),locality, date);
     }
 
     @GetMapping("/destinos/{hospedajeToken}")
