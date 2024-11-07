@@ -1,7 +1,7 @@
-package prueba1.login.jwt;
+package junior_tech_troopers.backendtroopers.jwt;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
+
 
 @Getter
 @AllArgsConstructor

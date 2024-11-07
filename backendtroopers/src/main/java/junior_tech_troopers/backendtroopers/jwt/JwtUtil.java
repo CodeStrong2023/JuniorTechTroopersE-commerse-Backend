@@ -1,4 +1,4 @@
-package prueba1.login.jwt;
+package junior_tech_troopers.backendtroopers.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

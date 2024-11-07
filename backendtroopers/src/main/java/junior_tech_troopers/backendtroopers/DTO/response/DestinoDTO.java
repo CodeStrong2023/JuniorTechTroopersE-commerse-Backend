@@ -1,5 +1,6 @@
 package junior_tech_troopers.backendtroopers.DTO.response;
 
+
 import lombok.*;
 
 @Getter
@@ -7,10 +8,9 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class HomeDTO {
+public class DestinoDTO {
     private String hospedajeToken;
     private String nombreHospedaje;
-    private String description;
     private String img_url;
-    private String locality;
+    private Double price;
 }
