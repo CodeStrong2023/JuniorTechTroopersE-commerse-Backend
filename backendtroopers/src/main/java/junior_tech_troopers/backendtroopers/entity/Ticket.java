@@ -1,4 +1,4 @@
-package prueba1.login.entity;
+package junior_tech_troopers.backendtroopers.entity;
 
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Column;
@@ -33,4 +33,13 @@ public class Ticket {
     private Date createdAt;
     @Column("active")
     private Boolean active;
+
+    @Column("hospedaje_nombre")
+    private String hospedajeNombre;
+    @Column("user_username")
+    private String username;
+    @Column("user_email")
+    private String userEmail;
+    @Column("user_phone")
+    private String userPhone;
 }

@@ -1,17 +1,17 @@
-package prueba1.login.controller;
+package junior_tech_troopers.backendtroopers.controller;
 
+
+import junior_tech_troopers.backendtroopers.DTO.response.UserPerfilDTO;
+import junior_tech_troopers.backendtroopers.service.UserService;
+import junior_tech_troopers.backendtroopers.jwt.JwtDTO;
+import junior_tech_troopers.backendtroopers.jwt.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import prueba1.login.jwt.JwtDTO;
-import prueba1.login.jwt.JwtUtil;
-import prueba1.login.DTO.response.UserPerfilDTO;
-import prueba1.login.service.UserService;
 
 @RestController
 @RequestMapping("/users")
 @CrossOrigin("https://trooper-stay.web.app")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
@@ -28,5 +28,5 @@ public class UserController {
 
         return userService.obtenerPerfilUsuario(jwtDTO.getUserToken());
     }
-
 }
+

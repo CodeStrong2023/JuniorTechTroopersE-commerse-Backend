@@ -1,8 +1,10 @@
-package prueba1.login.entity;
+package junior_tech_troopers.backendtroopers.entity;
+
 
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+
 
 import java.util.Date;
 

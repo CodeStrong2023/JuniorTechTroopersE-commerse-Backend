@@ -1,13 +1,14 @@
-package prueba1.login.service;
+package junior_tech_troopers.backendtroopers.service;
 
+import junior_tech_troopers.backendtroopers.DTO.response.UserPerfilDTO;
+import junior_tech_troopers.backendtroopers.entity.User;
+import junior_tech_troopers.backendtroopers.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import prueba1.login.entity.User;
-import prueba1.login.DTO.response.UserPerfilDTO;
-import prueba1.login.repository.UserRepository;
 
 @Service
 public class UserService {
+
 
     @Autowired
     private UserRepository userRepository;
@@ -32,3 +33,4 @@ public class UserService {
     }
 
 }
+
