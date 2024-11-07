@@ -29,3 +29,4 @@ public class UserController {
         return userService.obtenerPerfilUsuario(jwtDTO.getUserToken());
     }
 }
+

@@ -1,4 +1,5 @@
-package junior_tech_troopers.backendtroopers.controller;
+package prueba1.login.controller;
+
 
 
 import junior_tech_troopers.backendtroopers.DTO.request.UserLoginDTO;
@@ -7,6 +8,7 @@ import junior_tech_troopers.backendtroopers.jwt.JWTResponseDTO;
 import junior_tech_troopers.backendtroopers.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -17,8 +19,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public void registroUsuario(@RequestBody User user){
-
-
 
         authService.registroUsuario(user);
     }

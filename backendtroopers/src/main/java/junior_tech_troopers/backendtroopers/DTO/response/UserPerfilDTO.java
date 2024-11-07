@@ -1,3 +1,4 @@
+
 package junior_tech_troopers.backendtroopers.DTO.response;
 
 
@@ -26,3 +27,4 @@ public class UserPerfilDTO {
         this.error = error;
     }
 }
+
