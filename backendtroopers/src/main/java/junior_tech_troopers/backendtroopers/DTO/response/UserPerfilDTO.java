@@ -1,4 +1,5 @@
-package prueba1.login.DTO.response;
+
+package junior_tech_troopers.backendtroopers.DTO.response;
 
 
 import lombok.*;
@@ -26,3 +27,4 @@ public class UserPerfilDTO {
         this.error = error;
     }
 }
+

@@ -1,0 +1,17 @@
+{
+    "nombre": "Tower",
+    "capacidad": 5,
+    "descripcion": "el mejor hotel",
+    "precio_noche": 50000.00,
+    "ubicacion": "san rafael",
+    "wifi": false,
+    "imagenes": [
+        {
+            "imgUrl": "http://qweqweqweqweqwe.com"
+        },
+        {
+            "imgUrl": "http://qweqweqweqweqwe.com"
+        }
+    ]
+
+}

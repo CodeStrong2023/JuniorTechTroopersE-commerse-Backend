@@ -1,9 +1,9 @@
-package prueba1.login.DTO.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
+package junior_tech_troopers.backendtroopers.DTO.request;
+import lombok.*;
 @Getter
+@Setter
+
 @AllArgsConstructor
 public class UserLoginDTO {
     private String username;

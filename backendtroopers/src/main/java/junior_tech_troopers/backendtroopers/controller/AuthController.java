@@ -1,11 +1,14 @@
 package prueba1.login.controller;
 
+
+
+import junior_tech_troopers.backendtroopers.DTO.request.UserLoginDTO;
+import junior_tech_troopers.backendtroopers.entity.User;
+import junior_tech_troopers.backendtroopers.jwt.JWTResponseDTO;
+import junior_tech_troopers.backendtroopers.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import prueba1.login.entity.User;
-import prueba1.login.jwt.JWTResponseDTO;
-import prueba1.login.DTO.request.UserLoginDTO;
-import prueba1.login.service.AuthService;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -16,6 +19,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public void registroUsuario(@RequestBody User user){
+
         authService.registroUsuario(user);
     }
 

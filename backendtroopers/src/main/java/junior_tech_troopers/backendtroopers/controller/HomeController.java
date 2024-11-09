@@ -1,13 +1,13 @@
-package prueba1.login.controller;
+package junior_tech_troopers.backendtroopers.controller;
 
 
+import junior_tech_troopers.backendtroopers.DTO.response.HomeDTO;
+import junior_tech_troopers.backendtroopers.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import prueba1.login.DTO.response.HomeDTO;
-import prueba1.login.service.HomeService;
 
 import java.util.List;
 
@@ -25,3 +25,4 @@ public class HomeController {
         return homeService.getHome();
     }
 }
+
